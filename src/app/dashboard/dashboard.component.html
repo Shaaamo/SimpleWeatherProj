@@ -1,0 +1,13 @@
+<input class="input" (keyup.enter)="onGetData()" type="text" [formControl]="cityControl">
+
+<button (click)="onGetData()">Get weather</button>
+
+@if(isLoading) {
+    <p>Loading...</p>
+}
+
+@if(!isError){
+<app-div-data [dataSignal]="dataSignal"></app-div-data>
+} @else {
+    <h3>No such city Found!!</h3>
+}
