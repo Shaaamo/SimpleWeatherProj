@@ -1,0 +1,12 @@
+<div>
+    @let weatherData = dataSignal();
+    @if(weatherData) {
+        <h3>{{weatherData.name}}</h3>
+        <p>Temp: {{weatherData.main.temp | number:'1.0-0'}}℃</p>
+        @for (weather of weatherData.weather; track $index;) {
+            <p>{{weather.main}}</p>
+        }
+        <p>Wind: {{weatherData.wind.speed | number:'1.0-0'}} Km/h</p>
+        <p>Humidity: {{weatherData.main.humidity}}%</p>
+    }
+</div>

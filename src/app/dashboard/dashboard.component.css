@@ -1,0 +1,25 @@
+.input {
+    outline: none;
+    padding: 10px;
+    border: none;
+    border-radius: 15px;
+    transition: all .3s;
+}
+
+.input:hover,.input:focus {
+    box-shadow: 10px 10px 10px rgb(177, 168, 186);
+}
+
+button {
+    outline: none;
+    padding: 10px;
+    border: none;
+    border-radius: 15px;
+    margin-left: 15px;
+    font-family: inherit;
+    transition: all .3s;
+    margin-bottom: 30px;
+}
+button:hover,button:focus {
+    background-color: rgb(223, 236, 248);
+}

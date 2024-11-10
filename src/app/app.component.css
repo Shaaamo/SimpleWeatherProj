@@ -1,0 +1,8 @@
+.wrapper {
+    width: 350px;
+    margin: 0 auto;
+    background-color: aliceblue;
+    border-radius: 15px;
+    padding: 10px;
+    text-align: center;
+}
