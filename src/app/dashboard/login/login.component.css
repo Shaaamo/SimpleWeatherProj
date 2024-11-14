@@ -1,0 +1,32 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.form-input {
+  outline: none;
+  padding: 10px;
+  border: none;
+  border-radius: 15px;
+  transition: all .3s;
+}
+
+.form-input:hover, .form-input:focus {
+  box-shadow: 10px 10px 10px rgb(177, 168, 186);
+}
+
+button {
+  outline: none;
+  padding: 10px;
+  border: none;
+  border-radius: 15px;
+  font-family: inherit;
+  font-size: 16px;
+  transition: all .5s;
+}
+
+button:active {
+  background-color: #989797;
+}

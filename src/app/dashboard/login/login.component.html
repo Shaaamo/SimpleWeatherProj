@@ -1,0 +1,13 @@
+<form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
+  <input class="form-input" formControlName="username" placeholder="Type admin username here!">
+  <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+    Username is required and must be at least 3 characters long.
+  </div>
+  <input class="form-input" type="password" formControlName="password" placeholder="Type admin password here!">
+  <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+    Password is required and must be at least 6 characters long.
+  </div>
+
+  <button type="submit" [disabled]="loginForm.invalid">Login</button>
+</form>
+<p *ngIf="errorMessage">{{ errorMessage }}</p>
