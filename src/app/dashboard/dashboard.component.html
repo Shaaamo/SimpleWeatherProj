@@ -14,7 +14,7 @@
 @if (isAdmin && isLoggedIn) {
   <label class="inputLabel" for="inputCity">Or just choose one of the Capitals!</label>
   <div class="popular-cities" *ngFor="let city of popularCities">
-    <div class="capital" (click)="onSelectCity(city.name, city.imageUrl)">{{ city.name }}</div>
+    <div class="capital" (click)="onSelectCity(city.name)">{{ city.name }}</div>
   </div>
 }
 
