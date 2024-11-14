@@ -1,4 +1,4 @@
-import {Component, ElementRef, signal, ViewChild, WritableSignal} from '@angular/core';
+import {Component} from '@angular/core';
 import { ApiService } from '../common/services/api.service';
 import { GetWeatherResponse } from '../common/interfaces/get-weather-response.interface';
 import { catchError, tap } from 'rxjs';
@@ -35,8 +35,7 @@ export class DashboardComponent {
     { name: 'Tokyo', imageUrl: 'http://localhost:3000/tokyo' },
   ];
 
-
-  dataSignal: WritableSignal<GetWeatherResponse | null> = signal<GetWeatherResponse | null>(null);
+  weatherObj: GetWeatherResponse | null = null;
 
   constructor(private readonly api: ApiService) {}
 
@@ -49,7 +48,7 @@ export class DashboardComponent {
 
     this.api.getWeather(this.cityControl.value).pipe(
       tap((response) => {
-        this.dataSignal.set(response)
+        this.weatherObj = response;
         this.isLoading = false;
         this.isError = false;
       }),

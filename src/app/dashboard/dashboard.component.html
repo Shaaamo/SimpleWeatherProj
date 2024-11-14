@@ -24,7 +24,7 @@
 }
 
 @if (!isError) {
-  <app-div-data [dataSignal]="dataSignal"></app-div-data>
+  <app-div-data [weatherObj]="weatherObj"></app-div-data>
 
   <div class="div-image" *ngIf="selectedCityImage">
     <img class="selected-image" [src]="selectedCityImage" alt="City Image"/>

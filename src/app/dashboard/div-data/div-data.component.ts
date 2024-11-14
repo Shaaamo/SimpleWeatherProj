@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, Input, Signal, WritableSignal } from '@angular/core';
-import { GetWeatherResponse } from '../../common/interfaces/get-weather-response.interface';
-import { CommonModule } from '@angular/common';
+import { Component, Input} from '@angular/core';
+import {GetWeatherResponse} from '../../common/interfaces/get-weather-response.interface';
+import {CommonModule} from '@angular/common';
 
 
 @Component({
@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
   templateUrl: './div-data.component.html',
   styleUrl: './div-data.component.css'
 })
-export class DivDataComponent{
-  @Input() dataSignal!: Signal<GetWeatherResponse | null>;
-  
+export class DivDataComponent {
+  @Input() weatherObj!: GetWeatherResponse | null;
 }
