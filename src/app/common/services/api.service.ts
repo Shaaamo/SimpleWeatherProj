@@ -16,4 +16,5 @@ export class ApiService {
 
     return this.http.get<GetWeatherResponse>(apiUrl)
   }
+
 }

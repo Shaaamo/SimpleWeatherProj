@@ -1,13 +1,34 @@
-<input class="input" (keyup.enter)="onGetData()" type="text" [formControl]="cityControl">
+<div>
+  @if (!isAdmin || !isLoggedIn) {
+    <a [routerLink]="['/login']">Login</a>
+  } @else {
+    <h3>Admin</h3>
+  }
+</div>
+<br>
+<input id="inputCity" class="input" (keyup.enter)="onGetData()" type="text" [formControl]="cityControl"
+       placeholder="Type the city name!">
 
 <button (click)="onGetData()">Get weather</button>
 
-@if(isLoading) {
-    <p>Loading...</p>
+@if (isAdmin && isLoggedIn) {
+  <label class="inputLabel" for="inputCity">Or just choose one of the Capitals!</label>
+  <div class="popular-cities" *ngFor="let city of popularCities">
+    <div class="capital" (click)="onSelectCity(city.name, city.imageUrl)">{{ city.name }}</div>
+  </div>
 }
 
-@if(!isError){
-<app-div-data [dataSignal]="dataSignal"></app-div-data>
+
+@if (isLoading) {
+  <p>Loading...</p>
+}
+
+@if (!isError) {
+  <app-div-data [dataSignal]="dataSignal"></app-div-data>
+
+  <div class="div-image" *ngIf="selectedCityImage">
+    <img class="selected-image" [src]="selectedCityImage" alt="City Image"/>
+  </div>
 } @else {
-    <h3>No such city Found!!</h3>
+  <h3>No such city Found!!</h3>
 }

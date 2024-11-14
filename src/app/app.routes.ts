@@ -1,21 +1,24 @@
-import { Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { BlockCompComponent } from './dashboard/block-comp/block-comp.component';
-import { hideCompGuard } from './common/guards/hide-comp.guard';
+import {Routes} from '@angular/router';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {LoginComponent} from './dashboard/login/login.component';
 
 export const routes: Routes = [
-    {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full'
-    },
-    {
-        path: 'dashboard',
-        component: DashboardComponent
-    },
-    {
-        path: 'block',
-        component: BlockCompComponent,
-        canActivate: [hideCompGuard]
-    }
+  {
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full'
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'dashboard',
+    pathMatch: "full"
+  }
 ];
