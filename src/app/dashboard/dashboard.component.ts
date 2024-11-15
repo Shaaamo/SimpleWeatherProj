@@ -29,24 +29,26 @@ export class DashboardComponent {
   weatherObj: GetWeatherResponse | null = null;
 
   constructor(private readonly api: ApiService, private http: HttpClient) {
-    this.checkAdmin();
+    this.fetchAdminData();
   }
-  checkAdmin() {
+
+  fetchAdminData() {
     const token = localStorage.getItem('token');
     if (!token) return;
 
-    // Отправляем запрос для проверки доступа к популярным городам
     this.http
-      .get<{ name: string }[]>('http://localhost:3000/popular-cities', {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .get<{ isAdmin: boolean; cities: { name: string }[] }>(
+        'http://localhost:3000/popular-cities',
+        {headers: {Authorization: `Bearer ${token}`}}
+      )
       .subscribe({
-        next: (cities) => {
-          this.isAdmin = true;
-          this.popularCities = cities;
+        next: (response) => {
+          this.isAdmin = response.isAdmin;
+          this.popularCities = response.cities;
         },
         error: () => {
           this.isAdmin = false;
+          this.popularCities = [];
         },
       });
   }
