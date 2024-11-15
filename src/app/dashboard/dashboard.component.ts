@@ -22,23 +22,33 @@ export class DashboardComponent {
   isError: boolean = false;
   isLoading: boolean = false;
   isLoggedIn: boolean = !!localStorage.getItem('token');
-  isAdmin: boolean = localStorage.getItem('isAdmin') === 'true';
+  isAdmin: boolean = false;
   selectedCityImage: string | null = null;
-  popularCities = [
-    {name: 'Paris'},
-    {name: 'London'},
-    {name: 'Moscow'},
-    {name: 'Warsaw'},
-    {name: 'Berlin'},
-    {name: 'Lisbon'},
-    {name: 'Rome'},
-    {name: 'Sydney'},
-    {name: 'Tokyo'},
-  ];
+  popularCities: Array<{ name: string }> = [];
 
   weatherObj: GetWeatherResponse | null = null;
 
   constructor(private readonly api: ApiService, private http: HttpClient) {
+    this.checkAdmin();
+  }
+  checkAdmin() {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    // Отправляем запрос для проверки доступа к популярным городам
+    this.http
+      .get<{ name: string }[]>('http://localhost:3000/popular-cities', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .subscribe({
+        next: (cities) => {
+          this.isAdmin = true;
+          this.popularCities = cities;
+        },
+        error: () => {
+          this.isAdmin = false;
+        },
+      });
   }
 
 

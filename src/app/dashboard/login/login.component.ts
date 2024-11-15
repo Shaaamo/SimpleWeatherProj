@@ -35,12 +35,12 @@ export class LoginComponent {
       next: (response: any) => {
         localStorage.setItem('token', response.token);
 
-        if (username === 'mor_2314') {
-          localStorage.setItem('isAdmin', 'true');
-        }
+        // if (username === 'mor_2314') {
+        //   localStorage.setItem('isAdmin', 'true');
+        // }
 
         this.router.navigate(['/dashboard']);
-      },  
+      },
       error: () => {
         this.errorMessage = 'Invalid credentials';
       }
