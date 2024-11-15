@@ -21,4 +21,5 @@ export class ApiService {
 
     return this.http.get<GetWeatherResponse>(this.apiUrl, {params})
   }
+
 }

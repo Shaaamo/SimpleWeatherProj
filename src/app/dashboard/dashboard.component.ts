@@ -25,15 +25,15 @@ export class DashboardComponent {
   isAdmin: boolean = localStorage.getItem('isAdmin') === 'true';
   selectedCityImage: string | null = null;
   popularCities = [
-    {name: 'Paris', imageUrl: 'http://localhost:3000/paris'},
-    {name: 'London', imageUrl: 'http://localhost:3000/london'},
-    {name: 'Moscow', imageUrl: 'http://localhost:3000/moscow'},
-    {name: 'Warsaw', imageUrl: 'http://localhost:3000/warsaw'},
-    {name: 'Berlin', imageUrl: 'http://localhost:3000/berlin'},
-    {name: 'Lisbon', imageUrl: 'http://localhost:3000/lisbon'},
-    {name: 'Rome', imageUrl: 'http://localhost:3000/rome'},
-    {name: 'Sydney', imageUrl: 'http://localhost:3000/sydney'},
-    {name: 'Tokyo', imageUrl: 'http://localhost:3000/tokyo'},
+    {name: 'Paris'},
+    {name: 'London'},
+    {name: 'Moscow'},
+    {name: 'Warsaw'},
+    {name: 'Berlin'},
+    {name: 'Lisbon'},
+    {name: 'Rome'},
+    {name: 'Sydney'},
+    {name: 'Tokyo'},
   ];
 
   weatherObj: GetWeatherResponse | null = null;
@@ -44,9 +44,6 @@ export class DashboardComponent {
 
   onGetData() {
     this.isLoading = true;
-
-    const cityMatch = this.popularCities.find(city => city.name.toLowerCase() === this.cityControl.value.toLowerCase());
-    this.selectedCityImage = cityMatch ? cityMatch.imageUrl : null;
 
     this.api.getWeather(this.cityControl.value).pipe(
       tap((response) => {
@@ -68,17 +65,14 @@ export class DashboardComponent {
     this.onGetData();
     this.http.get(`http://localhost:3000/${cityName.toLowerCase()}`, {
       headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`},
-      responseType: 'blob' // если требуется загрузить изображение как Blob
+      responseType: 'blob'
     }).subscribe({
       next: (response) => {
-        // Обработка успешного получения изображения
-
         this.selectedCityImage = URL.createObjectURL(response);
       },
       error: (err) => {
         if (err.status === 401) {
           console.error('Unauthorized access');
-          // Отобразить сообщение о недоступности ресурса
           this.selectedCityImage = null;
         }
       }
